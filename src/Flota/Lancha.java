@@ -4,6 +4,6 @@ import TableroMar.Casilla;
 
 public class Lancha extends Barcos{
     Lancha(int posicion, Casilla[] coordenadas) {
-        super(posicion, coordenadas);
+        super(0, new Casilla[Piezas.LANCHA.getTamano()]);
     }
 }

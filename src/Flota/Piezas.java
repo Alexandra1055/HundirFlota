@@ -13,4 +13,8 @@ public enum Piezas {
     Piezas(int TAMANO){
         this.TAMANO = TAMANO;
     }
+
+    public int getTamano() {
+        return TAMANO;
+    }
 }

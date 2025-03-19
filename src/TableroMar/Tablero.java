@@ -28,23 +28,67 @@ public class Tablero {
 
         while (!colocar){
             boolean horizontal = random.nextBoolean();
+            int fila = random.nextInt(TOTAL_FILAS);
+            int columna = random.nextInt(TOTAL_COLUMNAS);
+            int tamano = barco.getCoordenadas().length;
+
+            if( puedeColocarse(fila,columna,tamano,horizontal)){
+                Casilla[] coordenadas = new Casilla[tamano];
+
+                for (int i = 0; i < tamano; i++) {
+                    if (horizontal) {
+                        casillas[fila][columna + i].setAgua(false);
+                        coordenadas[i] = casillas[fila][columna + i];
+                    } else {
+                        casillas[fila + i][columna].setAgua(false);
+                        coordenadas[i] = casillas[fila + i][columna];
+                    }
+                }
+
+                barco.setCoordenadas(coordenadas);
+                colocar = true;
+            }
         }
 
     }
 
     public boolean puedeColocarse (int fila, int columna, int tamano, boolean horizontal){
 
-        for (int i = 0; i < tamano; i++) {
-            if(horizontal){
-                columna = columna + i;
-            } else {
-                fila = fila + 1;
+        if(horizontal){
+            if (columna + tamano > TOTAL_COLUMNAS){
+                return false;
+            }
+            for (int i = 0; i < tamano; i++) {
+
+                if ( !casillas[fila][columna + i].isAgua() ){
+                    return false;
+                }
+            }
+        }else {
+            if (fila + tamano > TOTAL_FILAS){
+                return false;
+            }
+            for (int i = 0; i < tamano; i++) {
+
+                if ( !casillas[fila + i][columna].isAgua() ){
+                    return false;
+                }
             }
         }
-
-
-
+        return true;
     }
 
+    public void imprimirTablero(){
+        for (int i = 0; i < TOTAL_FILAS; i++) {
+            for (int j = 0; j < TOTAL_COLUMNAS; j++) {
+                if (casillas[i][j].isAgua()){
+                    System.out.print("|~|");
+                } else {
+                    System.out.print("| |");
+                }
+            }
+            System.out.println();
+        }
+    }
 
 }

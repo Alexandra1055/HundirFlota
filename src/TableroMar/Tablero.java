@@ -1,4 +1,7 @@
 package TableroMar;
+import Flota.*;
+
+import java.util.Random;
 
 public class Tablero {
 
@@ -17,6 +20,30 @@ public class Tablero {
                 casillas[fila][columna] = new Casilla(fila,columna,true);
             }
         }
+    }
+
+    public void colocarBarcoRandom (Barcos barco){
+        Random random = new Random();
+        boolean colocar = false;
+
+        while (!colocar){
+            boolean horizontal = random.nextBoolean();
+        }
+
+    }
+
+    public boolean puedeColocarse (int fila, int columna, int tamano, boolean horizontal){
+
+        for (int i = 0; i < tamano; i++) {
+            if(horizontal){
+                columna = columna + i;
+            } else {
+                fila = fila + 1;
+            }
+        }
+
+
+
     }
 
 

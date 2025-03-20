@@ -1,15 +1,21 @@
 package TableroMar;
 
+import Flota.Barcos;
+
 public class Casilla {
     protected int fila;
     protected int columna;
     protected boolean agua;
+    private boolean destapado;
+    private Barcos barco;
 
 
     public Casilla (int fila, int columna, boolean agua){
         this.fila = fila;
         this.columna = columna;
         this.agua = agua;
+        this.destapado = false;
+        this.barco = null;
 
     }
 
@@ -37,4 +43,19 @@ public class Casilla {
         this.agua = agua;
     }
 
+    public boolean isDestapado() {
+        return destapado;
+    }
+
+    public void setDestapado(boolean destapado) {
+        this.destapado = destapado;
+    }
+
+    public Barcos getBarco(){
+        return barco;
+    }
+
+    public void setBarco(Barcos barco){
+        this.barco = barco;
+    }
 }

@@ -2,13 +2,23 @@ package Flota;
 
 import TableroMar.Casilla;
 
-public class Barcos{
+public abstract class Barcos{
     private int posicion;
     public Casilla[] coordenadas;
+    private boolean hundido;
 
     Barcos(int posicion, Casilla[] coordenadas){
         this.coordenadas = coordenadas;
         this.posicion = posicion;
+        this.hundido = false;
+    }
+
+    public boolean isHundido() {
+        return hundido;
+    }
+
+    public void setHundido(boolean hundido) {
+        this.hundido = hundido;
     }
 
     public int getPosicion() {
@@ -26,4 +36,7 @@ public class Barcos{
     public void setCoordenadas(Casilla[] coordenadas) {
         this.coordenadas = coordenadas;
     }
+
+    public abstract String getEmoji();
+
 }

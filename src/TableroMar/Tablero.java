@@ -38,9 +38,11 @@ public class Tablero {
                 for (int i = 0; i < tamano; i++) {
                     if (horizontal) {
                         casillas[fila][columna + i].setAgua(false);
+                        casillas[fila][columna + i].setBarco(barco);
                         coordenadas[i] = casillas[fila][columna + i];
                     } else {
                         casillas[fila + i][columna].setAgua(false);
+                        casillas[fila + i][columna].setBarco(barco);
                         coordenadas[i] = casillas[fila + i][columna];
                     }
                 }
@@ -78,17 +80,30 @@ public class Tablero {
         return true;
     }
 
-    public void imprimirTablero(){
-        for (int i = 0; i < TOTAL_FILAS; i++) {
-            for (int j = 0; j < TOTAL_COLUMNAS; j++) {
-                if (casillas[i][j].isAgua()){
-                    System.out.print("|~|");
-                } else {
-                    System.out.print("| |");
-                }
-            }
-            System.out.println();
+    public boolean disparar (int fila, int columna){
+        if (fila < 0 || fila >= TOTAL_FILAS || columna < 0 || columna >= TOTAL_COLUMNAS) {
+            System.out.println("Coordenadas fuera del tablero.");
+            return false;
         }
+
+        Casilla casilla = casillas[fila][columna];
+        if (casilla.isDestapado()){
+            System.out.println("Ya has disparado a esta casilla, vuelve a intentarlo.");
+            return false;
+        }
+
+        casilla.setDestapado(true);
+        if (!casilla.isAgua()){
+            System.out.println("Tocado \uD83D\uDCA5");
+            return true;
+        } else {
+            System.out.println("Agua \uD83C\uDF0A");
+            return false;
+        }
+
     }
 
+    public Casilla getCasillas(int fila, int columna) {
+        return casillas[fila][columna];
+    }
 }

@@ -94,11 +94,31 @@ public class Tablero {
 
         casilla.setDestapado(true);
         if (!casilla.isAgua()){
-            System.out.println("Tocado \uD83D\uDCA5");
             return true;
         } else {
-            System.out.println("Agua \uD83C\uDF0A");
             return false;
+        }
+
+    }
+
+    public void aguaCerca(int fila, int columna){
+        int[][] direcciones = {
+                {-1, -1}, {-1, 0}, {-1, 1},
+                {0, -1}, {0, 1},
+                {1, -1}, {1, 0}, {1, 1}
+        };
+
+        for (int i = 0; i < direcciones.length; i++) {
+            int filaN = fila + direcciones[i][0];
+            int columnaN = columna + direcciones[i][1];
+
+            if (filaN >= 0 && filaN < TOTAL_FILAS && columnaN >= 0 && columnaN < TOTAL_COLUMNAS){
+                Casilla casillaAlRededor = casillas[filaN][columnaN];
+
+                if (!casillaAlRededor.isDestapado() && casillaAlRededor.isAgua()){
+                 casillaAlRededor.setDestapado(true);
+                }
+            }
         }
 
     }

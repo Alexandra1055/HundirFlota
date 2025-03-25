@@ -46,7 +46,7 @@ public class Juego {
             boolean tocado = disparar(fila,columna);
 
             if (tocado){
-                Display.imprimirMensaje("Tocado \uD83D\uDCA5");
+                Display.imprimirMensaje("Tocado \uD83D\uDCA5!!");
                 chequearHundimientos();
             } else {
                 Display.imprimirMensaje("Agua \uD83C\uDF0A");

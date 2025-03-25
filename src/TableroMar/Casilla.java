@@ -16,7 +16,6 @@ public class Casilla {
         this.agua = agua;
         this.destapado = false;
         this.barco = null;
-
     }
 
     public int getFila() {

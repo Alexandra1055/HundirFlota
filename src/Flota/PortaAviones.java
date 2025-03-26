@@ -1,13 +1,15 @@
 package Flota;
 
-import TableroMar.Casilla;
-
-public class PortaAviones extends Barcos{
+public class PortaAviones extends Barco {
 
     public PortaAviones() {
-        super(0, new Casilla[Piezas.PORTAAVIONES.getTamano()]);
+        super(5);
     }
 
+    @Override
+    public boolean estaHundido() {
+        return false;
+    }
     @Override
     public String getEmoji(){
         return "\uD83D\uDEA2";

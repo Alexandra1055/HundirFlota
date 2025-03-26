@@ -22,7 +22,7 @@ public class Tablero {
         }
     }
 
-    public void colocarBarcoRandom (Barcos barco){
+    public void colocarBarcoRandom (Barco barco){
         Random random = new Random();
         boolean colocar = false;
 
@@ -30,7 +30,7 @@ public class Tablero {
             boolean horizontal = random.nextBoolean();
             int fila = random.nextInt(TOTAL_FILAS);
             int columna = random.nextInt(TOTAL_COLUMNAS);
-            int tamano = barco.getCoordenadas().length;
+            int tamano = barco.getLongitud();
 
             if( puedeColocarse(fila,columna,tamano,horizontal)){
                 Casilla[] coordenadas = new Casilla[tamano];
@@ -47,7 +47,7 @@ public class Tablero {
                     }
                 }
 
-                barco.setCoordenadas(coordenadas);
+                barco.getLongitud();
                 colocar = true;
             }
         }
@@ -60,20 +60,33 @@ public class Tablero {
             if (columna + tamano > TOTAL_COLUMNAS){
                 return false;
             }
-            for (int i = 0; i < tamano; i++) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j < tamano; j++) {
+                    int filaCercana = fila + i;
+                    int columnaCercana = columna + j;
 
-                if ( !casillas[fila][columna + i].isAgua() ){
-                    return false;
+                    if (filaCercana >= 0 && filaCercana < TOTAL_FILAS && columnaCercana >= 0 && columnaCercana < TOTAL_COLUMNAS) {
+                        if (!casillas[filaCercana][columnaCercana].isAgua()) {
+                            return false;
+                        }
+                    }
                 }
             }
         }else {
             if (fila + tamano > TOTAL_FILAS){
                 return false;
             }
-            for (int i = 0; i < tamano; i++) {
 
-                if ( !casillas[fila + i][columna].isAgua() ){
-                    return false;
+            for (int i = -1; i < tamano; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int filaCercana = fila + i;
+                    int columnaCercana = columna + j;
+
+                    if (filaCercana >= 0 && filaCercana < TOTAL_FILAS && columnaCercana >= 0 && columnaCercana < TOTAL_COLUMNAS) {
+                        if (!casillas[filaCercana][columnaCercana].isAgua()) {
+                            return false;
+                        }
+                    }
                 }
             }
         }
@@ -94,6 +107,7 @@ public class Tablero {
 
         casilla.setDestapado(true);
         if (!casilla.isAgua()){
+            destaparAguaCerca(fila, columna);
             return true;
         } else {
             return false;
@@ -120,6 +134,34 @@ public class Tablero {
                 }
             }
         }
+
+    }
+
+    public void destaparAguaCerca (int fila, int columna){
+
+        Casilla casilla = casillas[fila][columna];
+
+        if (casilla.getBarco() != null){
+            Barco barco = casilla.getBarco();
+            Casilla [] partesBarco = barco.getLongitud();
+            boolean todoDestapado = true;
+
+            for (int i = 0; i < partesBarco.length; i++) {
+                if (!partesBarco[i].isDestapado()){
+                    todoDestapado = false;
+                    break;
+                }
+            }
+         if (todoDestapado) {
+             for (int i = 0; i < partesBarco.length; i++) {
+                 int nFila = partesBarco[i].getFila();
+                 int nColumna = partesBarco[i].getColumna();
+
+                 aguaCerca(nFila, nColumna);
+             }
+         }
+        }
+
 
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Juego {
     private Tablero tablero;
-    private ArrayList<Barcos> flota;
+    private ArrayList<Barco> flota;
     private int disparos;
 
     public Juego() {
@@ -15,23 +15,23 @@ public class Juego {
     }
 
     private void crearFlota(){
-        Barcos portaaviones = new PortaAviones();
+        Barco portaaviones = new PortaAviones();
         tablero.colocarBarcoRandom(portaaviones);
         flota.add(portaaviones);
 
-        Barcos buque = new Buque();
+        Barco buque = new Buque();
         tablero.colocarBarcoRandom(buque);
         flota.add(buque);
 
-        Barcos submarino = new Submarino();
+        Barco submarino = new Submarino();
         tablero.colocarBarcoRandom(submarino);
         flota.add(submarino);
 
-        Barcos crucero = new Crucero();
+        Barco crucero = new Crucero();
         tablero.colocarBarcoRandom(crucero);
         flota.add(crucero);
 
-        Barcos lancha = new Lancha();
+        Barco lancha = new Lancha();
         tablero.colocarBarcoRandom(lancha);
         flota.add(lancha);
     }
@@ -57,7 +57,7 @@ public class Juego {
     }
 
 
-    public boolean barcoHundido(Barcos barco){
+    public boolean barcoHundido(Barco barco){
 
         Casilla[] casillas = barco.getCoordenadas();
 
@@ -74,11 +74,11 @@ public class Juego {
 
     public boolean todosBarcosHundidos(){
 
-        Barcos portaviones = flota.get(0);
-        Barcos buque = flota.get(1);
-        Barcos submarino = flota.get(2);
-        Barcos crucero = flota.get(3);
-        Barcos lancha = flota.get(4);
+        Barco portaviones = flota.get(0);
+        Barco buque = flota.get(1);
+        Barco submarino = flota.get(2);
+        Barco crucero = flota.get(3);
+        Barco lancha = flota.get(4);
 
         if(!barcoHundido(portaviones) ||
            !barcoHundido(buque) ||
@@ -92,27 +92,27 @@ public class Juego {
 
     private void chequearHundimientos(){
 
-        Barcos portaaviones = flota.get(0);
+        Barco portaaviones = flota.get(0);
         if(!portaaviones.isHundido() && barcoHundido(portaaviones)){
             Display.imprimirMensaje("¡Has hundido el Portaaviones " + portaaviones.getEmoji() + "!");
             portaaviones.setHundido(true);
         }
-        Barcos buque = flota.get(1);
+        Barco buque = flota.get(1);
         if(!buque.isHundido() && barcoHundido(buque)){
             Display.imprimirMensaje("¡Has hundido el Buque " + buque.getEmoji() + "!");
             buque.setHundido(true);
         }
-        Barcos submarino = flota.get(2);
+        Barco submarino = flota.get(2);
         if(!submarino.isHundido() && barcoHundido(submarino)){
             Display.imprimirMensaje("¡Has hundido el Submarino " + submarino.getEmoji() + "!");
             submarino.setHundido(true);
         }
-        Barcos crucero = flota.get(3);
+        Barco crucero = flota.get(3);
         if(!crucero.isHundido() && barcoHundido(crucero)){
             Display.imprimirMensaje("¡Has hundido el Crucero " + crucero.getEmoji() + "!");
             crucero.setHundido(true);
         }
-        Barcos lancha = flota.get(0);
+        Barco lancha = flota.get(0);
         if(!lancha.isHundido() && barcoHundido(lancha)){
             Display.imprimirMensaje("¡Has hundido el Lancha " + lancha.getEmoji() + "!");
             lancha.setHundido(true);
@@ -132,11 +132,11 @@ public class Juego {
         this.tablero = tablero;
     }
 
-    public ArrayList<Barcos> getFlota() {
+    public ArrayList<Barco> getFlota() {
         return flota;
     }
 
-    public void setFlota(ArrayList<Barcos> flota) {
+    public void setFlota(ArrayList<Barco> flota) {
         this.flota = flota;
     }
 

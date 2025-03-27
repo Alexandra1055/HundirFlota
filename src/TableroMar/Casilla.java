@@ -1,35 +1,26 @@
 package TableroMar;
 
-import Flota.Barco;
-
 public class Casilla {
-    protected int fila;
-    protected int columna;
-    protected boolean agua;
+    private int fila;
+    private int columna;
+    private boolean agua;
     private boolean destapado;
+    private String contenido;
 
-
-    public Casilla (int fila, int columna, boolean agua){
+    public Casilla(int fila, int columna, boolean agua) {
         this.fila = fila;
         this.columna = columna;
         this.agua = agua;
         this.destapado = false;
+        this.contenido = null;
     }
 
     public int getFila() {
         return fila;
     }
 
-    public void setFila(int fila) {
-        this.fila = fila;
-    }
-
     public int getColumna() {
         return columna;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
     }
 
     public boolean isAgua() {
@@ -48,11 +39,11 @@ public class Casilla {
         this.destapado = destapado;
     }
 
-    public Barco getBarco(){
-        return barco;
+    public String getContenido() {
+        return contenido;
     }
 
-    public void setBarco(Barco barco){
-        this.barco = barco;
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 }
